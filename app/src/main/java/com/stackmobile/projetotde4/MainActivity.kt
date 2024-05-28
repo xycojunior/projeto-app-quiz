@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import android.widget.Button
 import android.widget.RadioButton
 import androidx.appcompat.app.AppCompatActivity
 import com.stackmobile.projetotde4.databinding.ActivityMainBinding
@@ -85,6 +86,22 @@ class MainActivity : AppCompatActivity() {
 
         binding.questionTextView.text = "Quiz concluído! Você acertou $contadorRespostaCerta de $totalQuestions perguntas. $message"
         binding.opcoesRadio.removeAllViews()
+        binding.feedbackTextView.visibility = View.GONE
         binding.botaoEnviar.isEnabled = false
+
+        val restartButton = Button(this)
+        restartButton.text = "Reiniciar Quiz"
+        restartButton.setOnClickListener {
+            restartQuiz()
+        }
+        binding.opcoesRadio.addView(restartButton)
+
     }
+    private fun restartQuiz() {
+        indexQuestao = 0
+        contadorRespostaCerta = 0
+        binding.opcoesRadio.removeAllViews()
+        carregarQuestao()
+    }
+
 }
